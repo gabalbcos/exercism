@@ -16,10 +16,9 @@ def value_of_card(card):
     3.  '2' - '10' = numerical value.
     """
 
-    if card in "JQK": return 10
-    elif card == 'A': return 1
-    else: return int(card)
-
+    if card in 'JQK': return 10
+    if card == 'A': return 1
+    return int(card)
 
 def higher_card(card_one, card_two):
     """Determine which card has a higher value in the hand.
@@ -34,7 +33,7 @@ def higher_card(card_one, card_two):
 
     if value_of_card(card_one) > value_of_card(card_two): return card_one
     if value_of_card(card_one) < value_of_card(card_two): return card_two
-    if value_of_card(card_one) == value_of_card(card_two): return card_one, card_two
+    if value_of_card(card_one) == value_of_card(card_two): return (card_one, card_two)
 
 
 def value_of_ace(card_one, card_two):
@@ -49,9 +48,8 @@ def value_of_ace(card_one, card_two):
     """
     cards_sum = value_of_card(card_one) + value_of_card(card_two)
     if ('A' == card_one or 'A' == card_two): return 1
-    if cards_sum + 11 <= 21: return 11
-    else: return 1
-
+    if (cards_sum + 11) <= 21: return 11
+    return 1
 
 def is_blackjack(card_one, card_two):
     """Determine if the hand is a 'natural' or 'blackjack'.
