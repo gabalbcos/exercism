@@ -5,12 +5,17 @@
  * exercise in this file. Do not forget to export the entities
  * you defined so they are available for the tests.
  */
-function Size(widht = 80, height = 60) {
+export  function Size(width = 80, height = 60) {
   this.width = width;
   this.height = height;
 }
 
-function Position (x = 0, y = 0) {
+Size.prototype.resize = function (newWidth, newHeight) {
+  this.width = newWidth;
+  this.height = newHeight;
+}
+
+export function Position (x = 0, y = 0) {
   this.x = x;
   this.y = y;
 }
@@ -20,23 +25,20 @@ Position.prototype.move = function (newX, newY) {
   this.y = newY;
 }
 
-class ProgramWindow {
-  constructor(screenSize = new Size(800, 600), size = new Size(), positon = new Position()){
-    this.screenSize = screenSize;
-    this.size = size;
-    this.position = position;
+export  class ProgramWindow {
+  constructor(){
+    this.screenSize = new Size(800, 600);
+    this.size = new Size();
+    this.position = new Position();
   }
 
-  resize(new Size()) {
-    if (Size.width < 1) {
-      Size.widht = 1;
-    }
-    if (Size.height < 1) {
-      Size.widht = 1;
-    }    
-    if (Size.width <= this.screenSize.width - this.position.x) {
-      this.size = new Size
-    }
-    }
+  resize(newSize) {
+    const maxWidth = this.screenSize.width - this.position.x;
+    const maxHeight = this.screenSize.height - this.position.y;
+
+    const newWidth = Math.max(1, Math.min(newSize, maxWidth));
+    const newHeight = Math.max(1, Math.min(newSize, maxHeight));
+
+    this.size.resize(newWidth, newHeight);
   }
 }
